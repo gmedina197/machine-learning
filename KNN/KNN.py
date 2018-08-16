@@ -16,32 +16,51 @@ class KNN:
     def train(self):
         return
 
-    @staticmethod
-    def compute_votes(self, candidates):
-        return [0]
-
     def predict(self):
-
+        candidates = []
         for test_index, test_row in self.x_test.iterrows():
             test = np.array(test_row)
             distances = []
-            final_distances = []
-
             for train_index, train_row in self.x_train.iterrows():
-                train = np.array(train_row)
-                distance = np.linalg.norm(test - train)
-                distances.append(distance)
-
+                d = np.linalg.norm(test - np.array(train_row))
+                distances.append(d)
             distances = np.array(distances)
-            if self.distance_type == "st":
+
+            if self.distance_type == "sd":
                 distances = (distances - np.min(distances)) / (np.max(distances) - np.min(distances))
+            final_distance = []
 
-            for idx, dist in enumerate(distances):
-                if self.distance_type == "st":
-                    final_distances.append((1-dist, idx))
-                elif self.distance_type == "ied":
-                    final_distances.append((1/dist, idx))
+            for index, d in enumerate(distances):
+                if self.distance_type == "ied":
+                    final_distance.append((1 / d, index))
 
-            candidates = sorted(final_distances)[:self.k]
+                elif self.distance_type == "sd":
+                    final_distance.append((1 - d, index))
 
-            predictions = self.compute_votes(candidates)
+            candidates.append(sorted(final_distance)[:self.k])
+
+        predictions = []
+
+        for votes in candidates:
+            votes_count = {}
+            for vote in votes:
+                v = self.y_train.iloc[vote[1]][0]
+                if v not in votes_count:
+                    if self.vote_type == "mv":
+                        votes_count[v] = 1
+                    elif self.vote_type == "pv":
+                        votes_count[v] = 1 / vote[0]
+                else:
+                    if self.vote_type == "mv":
+                        votes_count[v] += 1
+                    elif self.vote_type == "pv":
+                        votes_count[v] += 1 / vote[0]
+            predictions.append(sorted(votes_count.items())[0])
+
+        sum_predicions = 0
+
+        for index, p in enumerate(predictions):
+            expected = self.y_test.iloc[index][0]
+            sum_predicions += expected == p[0]
+
+        return sum_predicions / len(self.x_test)
