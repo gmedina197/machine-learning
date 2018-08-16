@@ -24,11 +24,11 @@ for j in range(0, 10):
     for fold in kfolds:
         X_train, X_test = X.iloc[fold[0]], X.iloc[fold[1]]
         Y_train, Y_test = Y.iloc[fold[0]], Y.iloc[fold[1]]
-        classifier = KNN.KNN()
-        classifier.train(X_train, Y_train)
-        fold_result.append(classifier.predict(X_test, Y_test, k_value, distance_type="st"))
+        classifier = KNN.KNN(X_train, Y_train, X_test, Y_test, k_value, distance_type="st", vote_type="ied")
+        classifier.train()
+        fold_result.append(classifier.predict())
     print(fold_result)
-    #print(np.sum(fold_result) / 5)
-    #media_result.append(np.sum(fold_result) / 5)
+    # print(np.sum(fold_result) / 5)
+    # media_result.append(np.sum(fold_result) / 5)
 print("Media folds")
 print(np.sum(media_result) / 10)

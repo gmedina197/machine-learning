@@ -1,29 +1,47 @@
 import numpy as np
-from collections import Counter
+
 
 class KNN:
 
-    def train(self, X, Y):
-        self.X = X
-        self.Y = Y
+    def __init__(self, x_train, y_train, x_test, y_test, k, distance_type, vote_type):
+        self.y_test = y_test
+        self.x_test = x_test
+        self.y_train = y_train
+        self.x_train = x_train
+        self.vote_type = vote_type
+        self.distance_type = distance_type
+        self.k = k
 
-    def standard_distance(self, distances):
-        return (distances - np.min(distances)) / (np.max(distances) - np.min(distances))
+    # lazy algorithm
+    def train(self):
+        return
 
-    def predict(self, X_test, Y_test, k, distance_type):
+    @staticmethod
+    def compute_votes(self, candidates):
+        return [0]
 
-        for test_index, test_row in X_test.iterrows():
+    def predict(self):
+
+        for test_index, test_row in self.x_test.iterrows():
             test = np.array(test_row)
             distances = []
+            final_distances = []
 
-            for train_index, train_row in self.X.iterrows():
+            for train_index, train_row in self.x_train.iterrows():
                 train = np.array(train_row)
                 distance = np.linalg.norm(test - train)
                 distances.append(distance)
 
             distances = np.array(distances)
-            if distance_type == "st":
-                distances = self.standard_distance(np.array(distances))
-            # inverso da dist euclidiana
+            if self.distance_type == "st":
+                distances = (distances - np.min(distances)) / (np.max(distances) - np.min(distances))
 
-            # distancia normalizada
+            for idx, dist in enumerate(distances):
+                if self.distance_type == "st":
+                    final_distances.append((1-dist, idx))
+                elif self.distance_type == "ied":
+                    final_distances.append((1/dist, idx))
+
+            candidates = sorted(final_distances)[:self.k]
+
+            predictions = self.compute_votes(candidates)
