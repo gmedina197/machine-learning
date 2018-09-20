@@ -1,0 +1,112 @@
+=================================================
+k = 5
+voto majoritario
+distancia normalizada
+Execucao 0
+0.6501824972413207
+Execucao 1
+0.6501994737288854
+Execucao 2
+0.6501061030472794
+Execucao 3
+0.6501145912910619
+Execucao 4
+0.6501145912910619
+Execucao 5
+0.650165520753756
+Execucao 6
+0.6500551735845853
+Execucao 7
+0.6501230795348443
+Execucao 8
+0.6500891265597148
+Execucao 9
+0.6501315677786266
+----
+Resultado medio: 65.01281724811136
+
+=====================================================================
+k = 5
+voto ponderado
+distancia normalizada
+
+Execucao 0
+0.6501061030472794
+Execucao 1
+0.6501400560224089
+Execucao 2
+0.6501400560224089
+Execucao 3
+0.65007215007215
+Execucao 4
+0.6501315677786266
+Execucao 5
+0.6501655207537561
+Execucao 6
+0.6501655207537561
+Execucao 7
+0.6502164502164502
+Execucao 8
+0.6501485442661913
+Execucao 9
+0.6501230795348442
+----
+Resultado medio: 65.0140904846787
+
+
+===========================================================
+k = 5
+voto ponderado
+inverso da distancia euclidiana
+
+Execucao 0
+0.6501061030472796
+Execucao 1
+0.6501740089975383
+Execucao 2
+0.65007215007215
+Execucao 3
+0.6500976148034971
+Execucao 4
+0.6500891265597148
+Execucao 5
+0.6501740089975383
+Execucao 6
+0.6500976148034971
+Execucao 7
+0.650097614803497
+Execucao 8
+0.6501061030472796
+Execucao 9
+0.6501909854851031
+----
+Resultado medio: 65.01205330617094
+
+================================================================
+k = 5
+voto majoritario
+inverso da distancia euclidiana
+
+
+Execucao 0
+0.650114591291062
+Execucao 1
+0.6501485442661913
+Execucao 2
+0.6501824972413208
+Execucao 3
+0.6502419149477974
+Execucao 4
+0.6488328664799253
+Execucao 5
+0.6501485442661914
+Execucao 6
+0.6501994737288855
+Execucao 7
+0.5742975978270095
+Execucao 8
+0.650140056022409
+Execucao 9
+0.6501485442661913
+----
+Resultado medio: 64.24454630336983

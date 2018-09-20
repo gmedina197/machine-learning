@@ -6,7 +6,7 @@ import KNN
 from sklearn.model_selection import KFold
 
 
-k_value = 3
+k_value = 5
 df = pd.read_csv('Diabetes.csv')
 x, y = np.split(df, [len(df.columns) - 1], axis=1)
 media = []
@@ -18,7 +18,7 @@ for j in range(0, 10):
     for fold in folds:
         X_train, X_test = x.iloc[fold[0]], x.iloc[fold[1]]
         Y_train, Y_test = y.iloc[fold[0]], y.iloc[fold[1]]
-        classifier = KNN.KNN(X_train, Y_train, X_test, Y_test, k_value, "sd", "mv")
+        classifier = KNN.KNN(X_train, Y_train, X_test, Y_test, k_value, "ied", "mv")
         classifier.train()
         fold_result.append(classifier.predict())
     print("Execucao %s" % j)
